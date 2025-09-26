@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+    "title": "Балет 'Лебединое озеро'",
+    "date": "2025-09-26",
+    "location": "Театр оперы и балета",
+    "image": "https://storage.googleapis.com/events_images_prd/event/image/cropped_20250908043024_qmlm_WhatsApp_Image_2025-09-08_at_10.29.02_1.jpg"
+  },
+
+  {
+    "id": 2,
+    "title": "Симфония чувств: Чайковский, Римский-Корсаков, Рахманинов",
+    "date": "2025-09-27",
+    "location": "Театр оперы и балета",
+    "image": "https://storage.googleapis.com/events_images_prd/event/image/cropped_20250716083843_hnxg_WhatsApp_Image_2025-07-16_at_12.55.45.jpg"
+  },
+
+  {
+    "id": 3,
+    "title": "K-POP концерт",
+    "date": "2025-12-07",
+    "location": "Перцы Pub",
+    "image": "https://storage.googleapis.com/events_images_prd/event/image/img_kpop-concert-kisu1752864832.jpg"
+  }
+]
