@@ -7,6 +7,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import EventsPage from "./pages/EventsPage";
 import Detail from "./pages/Detail";
 import FavoritePage from "./pages/FavoritePage";
+import RegistrationPage from "./pages/RegistrationPage";
+import Login from "./pages/Login";
+import Users from "./pages/Users";
 
 function App() {
     return (
@@ -21,7 +24,10 @@ function App() {
                     </div>
                 } />
                 <Route path="/favorites" element={<FavoritePage />} />
+                <Route path="/register" element={<RegistrationPage />} />
                 <Route path="/events" element={<EventsPage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/users" element={<Users />} />
             </Routes>
             <Footer />
         </Router>

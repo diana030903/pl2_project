@@ -10,6 +10,8 @@ function Header() {
                 <Link to="/contacts" style={{margin: '10px', color: 'white'}}>Контакты</Link>
                 <Link to="/events" style={{margin: '10px', color: 'white'}}>Мероприятия</Link>
                 <Link to="/favorites" style={{margin: '10px', color: 'white'}}>Избранное</Link>
+                <Link to="/register" style={{margin: '10px', color: 'white'}}>Регистрация</Link>
+                <Link to="/login" style={{margin: '10px', color: 'white'}}>Вход</Link>
             </nav>
         </header>
     );
