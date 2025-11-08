@@ -5,12 +5,14 @@ import userReducer from './slices/userSlice';
 import authReducer from './slices/authSlice';
 import registrationMiddleware from './middleware/registration/registrationMiddleware';
 import authMiddleware from './middleware/authMiddleware';
+import ticketsReducer from './slices/ticketsSlice';
 
 const rootReducer = combineReducers({
     events: eventsReducer,
     favorite: favoritesReducer,
     user: userReducer,
     auth: authReducer,
+    tickets: ticketsReducer,
 });
 
 export const store = configureStore({
