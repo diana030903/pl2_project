@@ -6,6 +6,7 @@ function EventsList() {
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorite.list);
   const [events, setEvents] = useState([]);
+  const [filterLocation, setFilterLocation] = useState("all"); // состояние фильтра
 
   useEffect(() => {
     fetch("/events.json")
@@ -13,60 +14,94 @@ function EventsList() {
       .then((data) => setEvents(data));
   }, []);
 
+  // список уникальных мест для select
+  const locations = ["all", ...new Set(events.map((event) => event.location))];
+
+  // фильтруем события по выбранному месту
+  const filteredEvents =
+    filterLocation === "all"
+      ? events
+      : events.filter((event) => event.location === filterLocation);
+
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '20px',
-        flexWrap: 'wrap',
-        margin: '20px'
-      }}
-    >
-      {events.map((event) => {
-        const isFav = favorites.some((fav) => fav.id === event.id);
-        return (
-          <div
-            key={event.id}
-            style={{
-              border: '1px solid #ddd',
-              borderRadius: '12px',
-              padding: '10px',
-              width: '250px',
-              textAlign: 'center',
-              boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-              transition: 'transform 0.3s'
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
-            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-          >
-            <img
-              src={event.image}
-              alt={event.title}
-              style={{ width: '100%', borderRadius: '10px' }}
-            />
-            <h3
-            style={{
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              maxWidth: '100%'
-            }}
-            >{event.title}</h3>
-            <p><b>Дата:</b> {event.date}</p>
-            <p><b>Место:</b> {event.location}</p>
-            <button
-              onClick={() =>
-                isFav
-                  ? dispatch(removeFavorite(event.id))
-                  : dispatch(addFavorite(event))
-              }
+    <div>
+      {/* Выпадающий список фильтра */}
+      <div style={{ margin: "20px", textAlign: "center" }}>
+        <label htmlFor="locationFilter">Фильтр по месту: </label>
+        <select
+          id="locationFilter"
+          value={filterLocation}
+          onChange={(e) => setFilterLocation(e.target.value)}
+        >
+          {locations.map((loc) => (
+            <option key={loc} value={loc}>
+              {loc === "all" ? "Все места" : loc}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Контейнер с карточками событий */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "20px",
+          flexWrap: "wrap",
+          margin: "20px",
+        }}
+      >
+        {filteredEvents.map((event) => {
+          const isFav = favorites.some((fav) => fav.id === event.id);
+          return (
+            <div
+              key={event.id}
+              style={{
+                border: "1px solid #ddd",
+                borderRadius: "12px",
+                padding: "10px",
+                width: "250px",
+                textAlign: "center",
+                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                transition: "transform 0.3s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
-              {isFav ? "Удалить из избранного" : "Добавить в избранное"}
-            </button>
-          </div>
-        );
-      })}
+              <img
+                src={event.image}
+                alt={event.title}
+                style={{ width: "100%", borderRadius: "10px" }}
+              />
+              <h3
+                style={{
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  maxWidth: "100%",
+                }}
+              >
+                {event.title}
+              </h3>
+              <p>
+                <b>Дата:</b> {event.date}
+              </p>
+              <p>
+                <b>Место:</b> {event.location}
+              </p>
+              <button
+                onClick={() =>
+                  isFav
+                    ? dispatch(removeFavorite(event.id))
+                    : dispatch(addFavorite(event))
+                }
+              >
+                {isFav ? "Удалить из избранного" : "Добавить в избранное"}
+              </button>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
