@@ -12,6 +12,8 @@ function Header() {
                 <Link to="/favorites" style={{margin: '10px', color: 'white'}}>Избранное</Link>
                 <Link to="/register" style={{margin: '10px', color: 'white'}}>Регистрация</Link>
                 <Link to="/login" style={{margin: '10px', color: 'white'}}>Вход</Link>
+                <Link to="/tickets" style={{margin: '10px', color: 'white'}}>Билеты</Link>
+                <Link to="/booking" style={{margin: '10px', color: 'white'}}>Бронирование</Link>
             </nav>
         </header>
     );
